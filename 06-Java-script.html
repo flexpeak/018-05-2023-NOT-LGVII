@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #amarelo {
+            background-color: #ff0;
+        }
+    </style>
+</head>
+<body>
+    <div id="amarelo">
+        Lorem ipsum dolor sit amet.
+    </div>
+
+    <form action="email.html" method="post">
+        <input type="text" name="cep" id="cep" placeholder="Digite seu cep">
+    </form>
+
+    <button id="botao">Clique em mim</button>
+
+    <table>
+        <tr>
+            <th>Bairro</th>
+            <th>Complemento</th>
+            <th>Localidade</th>
+            <th>Logradouro</th>
+            <th>UF</th>
+        </tr>
+        <tr>
+            <td id="bairro"></td>
+            <td id="complemento"></td>
+            <td id="localidade"></td>
+            <td id="logradouro"></td>
+            <td id="uf"></td>
+        </tr>
+    </table>
+
+    <script>
+        /* 
+            Oculta um elemento
+            $("#amarelo").hide();
+            document.querySelector("#amarelo").style.display = "none";
+
+            Exibe um elemento
+            $("#amarelo").show();
+            document.querySelector("#amarelo").style.display = "block";
+
+            Altera o texto do elemento
+            $("#amarelo").text("Novo texto");
+            document.querySelector("#amarelo").innerText  = "Novo teto"
+
+            Altera o html do elemento
+            $("#amarelo").html("<h1>Novo html</h1>");
+            document.querySelector("#amarelo").innerHTML = "<h1>Novo html</h1>"
+
+            Insere o html do elemento sem retirar o já existente
+            document.querySelector("#amarelo").insertAdjacentHTML("beforeend", "<h2>Mais um html</h2>")
+
+            Adiciona uma classe no elemento
+            $("#amarelo").addClass("vermelho");
+            document.querySelector("#amarelo").classList.add("vermelho")
+
+            Retira uma classe do elemento
+            $("#amarelo").removeClass("vermelho");
+            document.querySelector("#amarelo").classList.remove("vermelho")
+
+            Espera o evento de click em um elemento
+            $("#botao").click(function () {
+                $("#amarelo").text("Olá essa é a aula de jQuery");
+            });
+            document.querySelector("#botao").addEventListener("click", (e) => {
+                document.querySelector("#amarelo").innerText = "Olá essa é a aula de JavaScript"
+            })
+
+            Pegar o valor digitado
+            var nome = $("#nome").val();
+            document.querySelector("#nome").value
+
+            Alterar o valor digitado
+            $("#nome").val("Adeliton");
+            document.querySelector("#nome").value = "Adeliton"
+
+            Retornar um parametro passado pela URL
+            var parametro = new URL(location.href).searchParams.get("nome_parametro")
+        */
+
+        document.querySelector("#botao").addEventListener("click", () => {
+            var cep = document.querySelector("#cep").value;
+
+            fetch("https://viacep.com.br/ws/" + cep + "/json/")
+                .then(endereco => endereco.json()) 
+                .then(endereco => {
+                    document.querySelector("#bairro").innerText = endereco.bairro
+                })
+                .catch((error) => {
+
+                })
+        });
+
+    </script>
+</body>
+</html>
